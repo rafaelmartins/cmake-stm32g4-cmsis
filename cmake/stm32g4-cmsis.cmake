@@ -183,30 +183,6 @@ function(stm32g4_target_set_hse_clock target frequency timeout)
     )
 endfunction()
 
-function(stm32g4_target_set_lsi_clock target frequency)
-    if(TARGET _stm32g4_target_set_lsi_clock_${target})
-        message(WARNING "stm32g4_target_set_lsi_clock(${target}) already called, ignoring.")
-        return()
-    endif()
-    add_library(_stm32g4_target_set_lsi_clock_${target} INTERFACE)
-
-    target_compile_definitions(${target} PRIVATE
-        LSI_VALUE=${frequency}
-    )
-endfunction()
-
-function(stm32g4_target_set_hsi_clock target frequency)
-    if(TARGET _stm32g4_target_set_hsi_clock_${target})
-        message(WARNING "stm32g4_target_set_hsi_clock(${target}) already called, ignoring.")
-        return()
-    endif()
-    add_library(_stm32g4_target_set_hsi_clock_${target} INTERFACE)
-
-    target_compile_definitions(${target} PRIVATE
-        HSI_VALUE=${frequency}
-    )
-endfunction()
-
 function(_stm32g4_stlink_variables)
     set(STLINK_RESET "$ENV{STLINK_RESET}" CACHE BOOL "stlink tools reset")
     if(STLINK_RESET)
